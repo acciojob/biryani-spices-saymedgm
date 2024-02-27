@@ -12,11 +12,11 @@ public class SpiceRepo {
     }
 
     public void addSpice(String name, double quantity) {
-    	//your code goes here
+        spiceMap.put(name, quantity);
+        System.out.println(name + " added to the repository with quantity: " + quantity);
     }
 
     public double getSpiceQuantity(String name) {
-    	//your code goes here
         if (spiceMap.containsKey(name)) {
             return spiceMap.get(name);
         } else {
@@ -25,15 +25,26 @@ public class SpiceRepo {
     }
 
     public void updateSpiceQuantity(String name, double newQuantity) {
-    	//your code goes here
+        if (spiceMap.containsKey(name)) {
+            spiceMap.put(name, newQuantity);
+            System.out.println(name + " quantity updated to: " + newQuantity);
+        } else {
+            throw new IllegalArgumentException("Spice not found: " + name);
+        }
     }
 
     public void removeSpice(String name) {
-    	//your code goes here
+        if (spiceMap.containsKey(name)) {
+            spiceMap.remove(name);
+            System.out.println(name + " removed from the repository.");
+        } else {
+            throw new IllegalArgumentException("Spice not found: " + name);
+        }
     }
 
     public double calculateTotalQuantity() {
-    	//your code goes here
+        double totalQuantity = spiceMap.values().stream().mapToDouble(Double::doubleValue).sum();
+        System.out.println("Total quantity of all spices: " + totalQuantity);
         return totalQuantity;
     }
 
